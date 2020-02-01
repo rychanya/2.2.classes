@@ -4,6 +4,12 @@ class Animal:
         self.name = name
         self.weight = weight
 
+    def __radd__(self, other):
+        return other + self.weight
+
+    def __gt__(self, other):
+        return self.weight > other.weight
+
     def feed(self):
         print(f'Feed {self.name}')
 
@@ -90,14 +96,9 @@ if __name__ == '__main__':
         Sheep('Кудрявый', 160)
     ]
 
-    animals_weight = sum([animal.weight for animal in uncle_joe_farm])
-    print(f'Общий вес всех животных: {animals_weight}')
-
-    name, weight = max(
-        [(animal.name, animal.weight) for animal in uncle_joe_farm],
-        key=lambda name_and_weight: name_and_weight[1]
-        )
-    print(f'Больше всего весит {name}. Вес {weight}.')
+    print(f'Общий вес всех животных: {sum(uncle_joe_farm)}')
+    most_hevy_animal = max(uncle_joe_farm)
+    print(f'Больше всего весит {most_hevy_animal.name}. Вес {most_hevy_animal.weight}.')
 
     print('Нужно со всеми поздороваться и сделать все необходимое.')
     for animal in uncle_joe_farm:
